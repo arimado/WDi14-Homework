@@ -203,3 +203,68 @@ dealership.each(function(car) {
 console.log( dealership.length )
 dealership.remove(jag);
 console.log( dealership.length )
+
+// ##################
+
+var ZooView = Backbone.View.extend({
+    el: "#app",
+
+    events: {
+        'click h1': 'headerClick',
+        'click li' : 'accessAnimal'
+    },
+
+    accessAnimal: function () {
+
+    },
+
+
+    headerClick: function (e) {
+        var $clickedElement = $( e.currentTarget )
+        $clickedElement.fadeToggle();
+    },
+
+    render: function () {
+
+        // this.collection.on("add", this.render)
+
+        this.$el.append('<h1>Yay, we just bought a zoo</h1>')
+        var $ul = $("<ul></ul>");
+        this.$el.append($ul);
+        console.log(this);
+
+        this.collection.each(function (animal) {
+            var $li = $("<li></li>");
+            $li.text(animal.get("type"));
+            $ul.append($li)
+        });
+
+
+    }
+});
+
+var Router = Backbone.Router.extend({
+    routes: {
+        ''          :'showZoo',
+        'secret'    : 'showSecret'
+    },
+    showZoo: function () {
+        var zv = new ZooView({
+            collection: zoo
+        });
+        zv.render();
+    },
+    showSecret: function () {
+        $('#app').html('I put bleach in your coffee');
+        $('#app').append('<a href="#"> GO HOME </a> ');
+    }
+})
+
+$(document).ready(function () {
+    var router = new Router();
+    Backbone.history.start();
+})
+
+
+// this.$el = el instanceof Backbone.$ ? el : Backbone.$(el);
+// 1286

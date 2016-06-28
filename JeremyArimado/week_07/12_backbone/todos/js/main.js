@@ -11,3 +11,13 @@ var Todo = Backbone.Model.extend({
         })
     }
 });
+
+var Todolist = Backbone.Collection.extend({
+    model: Todo,
+    localStorate: new Backbone.LocalStorage('todos-backbone'),
+    completed: function() {
+        return this.filter(function(todo) {
+
+        })
+    }
+})
