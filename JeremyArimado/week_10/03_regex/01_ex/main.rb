@@ -14,7 +14,16 @@ ARGF.each do |line|
     # # 4
     # match = /([A-Z])([a-z])/
 
-    
+    # # 5
+    # match = /([^\s])\1/
+
+    # # 6
+    # match = /($[Ff][Rr][Ee]$[Dd]|[Dd]\s)|($[Ww][Ii][Ll][Mm]$[Aa])/
+
+    # # 6
+    # match = /((fred|wilma)(?=(fred|wilma)))/
+
+
 
     if ( line =~ match )
       puts line
